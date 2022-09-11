@@ -5,6 +5,8 @@ import java.util.List;
 public class FootballClub extends Club {
 private int goalForCount;
 private int goalAgainst;
+private int differentGoal;
+private int equal;
 private List<Play>plays;
     public FootballClub(String name, int plays, double score, int winCount, int lossCount) {
         super(name, plays, score, winCount, lossCount);
@@ -37,5 +39,21 @@ private List<Play>plays;
              score+=1;
         }
         return score;
+    }
+
+    public int getDifferentGoal() {
+        return getGoalForCount()-getGoalAgainst();
+    }
+
+    public void setDifferentGoal(int differentGoal) {
+        this.differentGoal = differentGoal;
+    }
+
+    public int getEqual() {
+        return equal;
+    }
+
+    public void setEqual(int equal) {
+        this.equal = equal;
     }
 }
