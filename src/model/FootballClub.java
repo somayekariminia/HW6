@@ -8,7 +8,7 @@ private int goalAgainst;
 private int differentGoal;
 private int equal;
 private List<Play>plays;
-    public FootballClub(String name, int plays, double score, int winCount, int lossCount) {
+    public FootballClub(String name, int plays, double score, int winCount, int lossCount, int anInt, int resultSetInt, int setInt, double aDouble) {
         super(name, plays, score, winCount, lossCount);
     }
 
