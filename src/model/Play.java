@@ -4,7 +4,7 @@ public class Play {
     private String nameTeamFirst;
     private String nameTeamSecond;
     private int goalCountFirst;
-    private  int goalCountSecond;
+    private int goalCountSecond;
     private Result result;
 
     public Play(String nameTeamFirst, String nameTeamSecond, int goalCountFirst, int goalCountSecond, Result result) {
@@ -48,10 +48,16 @@ public class Play {
     }
 
     public Result getResult() {
-        return result;
+        return getResultTeam();
     }
 
     public void setResult(Result result) {
         this.result = result;
+    }
+
+    private Result getResultTeam() {
+        if (goalCountFirst > goalCountSecond) return Result.WIN;
+        else if (goalCountFirst < goalCountSecond) return Result.LOST;
+        else return Result.EQUAL;
     }
 }
