@@ -39,13 +39,13 @@ public class FootballRepository {
 
     public void delete(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from clup where nameclup=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from football where nameclup=?");
         preparedStatement.setString(1, name);
         preparedStatement.executeUpdate();
     }
     public void update(FootballClub clup) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("update  clup" + " set countplay=?,draw=?,forgoal=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where nameClup=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("update  football" + " set countplay=?,draw=?,forgoal=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where nameClup=?");
         preparedStatement.setInt(1, clup.getPlays());
         preparedStatement.setInt(2, clup.getGoalForCount());
         preparedStatement.setInt(3, clup.getGoalAgainst());
@@ -58,11 +58,11 @@ public class FootballRepository {
     }
     public List<FootballClub> select() throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from clup order by score desc ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from football order by score desc ");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<FootballClub> list = new ArrayList<>();
         while (resultSet.next()) {
-            FootballClub clup = new Clup(
+            FootballClub clup = new FootballClub(
                     resultSet.getString(1),
                     resultSet.getInt(2),
                     resultSet.getInt(3),
@@ -76,4 +76,17 @@ public class FootballRepository {
         }
         return list;
     }
+    public boolean isExist(String name) throws SQLException {
+        Connection connection = GetConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where nameClup=? ");
+        preparedStatement.setString(1, name);
+        boolean flage = false;
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            if (!resultSet.getString(1).equals(""))
+                flage = true;
+        }
+        return flage;
+    }
+
 }
