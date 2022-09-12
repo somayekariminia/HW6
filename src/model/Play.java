@@ -6,13 +6,14 @@ public class Play {
     private int goalCountFirst;
     private int goalCountSecond;
     private Result result;
-
-    public Play(String nameTeamFirst, String nameTeamSecond, int goalCountFirst, int goalCountSecond, Result result) {
+    private int id ;
+    public Play(int id,String nameTeamFirst, String nameTeamSecond, int goalCountFirst, int goalCountSecond,String result) {
+        this.id=id;
         this.nameTeamFirst = nameTeamFirst;
         this.nameTeamSecond = nameTeamSecond;
         this.goalCountFirst = goalCountFirst;
         this.goalCountSecond = goalCountSecond;
-        this.result = result;
+        this.result = Result.valueOf(result);
     }
 
     public String getNameTeamFirst() {
