@@ -9,11 +9,11 @@ import java.sql.SQLException;
 public class playFootballRepository {
     public void creatTablePlay() throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("CREATE table play(id  SERIAL PRIMARY KEY NOT NULL,team1 varchar(50),team2 varchar(50),count_team1 int,count_team2 int,state varchar(10))");
+        PreparedStatement preparedStatement = connection.prepareStatement("CREATE table playsFootball(id  SERIAL PRIMARY KEY NOT NULL,team1 varchar(50),team2 varchar(50),count_team1 int,count_team2 int,state varchar(10))");
         preparedStatement.executeUpdate();
     }
     public void insert(Play play) throws SQLException {
-        String str = "insert into play values(id,?,?,?,?,?)";
+        String str = "insert into playsFootball values(id,?,?,?,?,?)";
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(str);
         preparedStatement.setString(1, play.getNameTeamFirst());
@@ -23,6 +23,10 @@ public class playFootballRepository {
         preparedStatement.setString(5, play.getResult());
         preparedStatement.executeUpdate();
     }
-
+    public void delete(String name) throws SQLException {
+        Connection connection = GetConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from playsFootball where team1=?");
+        preparedStatement.setString(1, name);
+    }
 
 }
