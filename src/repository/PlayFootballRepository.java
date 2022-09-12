@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class playFootballRepository {
+public class PlayFootballRepository {
     public void creatTablePlay() throws SQLException {
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("CREATE table playsFootball(id  SERIAL PRIMARY KEY NOT NULL," +
@@ -36,9 +36,10 @@ public class playFootballRepository {
         PreparedStatement preparedStatement = connection.prepareStatement("delete from playsFootball where team1=?");
         preparedStatement.setString(1, name);
     }
-    public List<Play> select() throws SQLException {
+    public List<Play> select(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsFootball inner join fooball on playsFootball.id=football.id");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsFootball inner join fooball on playsFootball.id=football.id  where team1=?");
+        preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Play> list = new ArrayList<>();
         while (resultSet.next()) {
@@ -47,4 +48,5 @@ public class playFootballRepository {
         }
         return list;
     }
+
 }
