@@ -14,6 +14,9 @@ public class Club {
         this.lossCount = lossCount;
     }
 
+    public Club() {
+    }
+
     public String getName() {
         return name;
     }
