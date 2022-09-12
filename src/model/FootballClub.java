@@ -11,7 +11,12 @@ private List<Play>plays;
     public FootballClub(String name, int plays, double score, int winCount, int lossCount, int anInt, int resultSetInt, int setInt, double aDouble) {
         super(name, plays, score, winCount, lossCount);
     }
-
+public FootballClub(String name,List<Play>plays)
+{
+    super();
+    super.setName(name);
+    this.plays=plays;
+}
     public int getGoalForCount() {
         return goalForCount;
     }
