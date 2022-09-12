@@ -47,7 +47,7 @@ public class Play {
         this.goalCountSecond = goalCountSecond;
     }
 
-    public Result getResult() {
+    public String getResult() {
         return getResultTeam();
     }
 
@@ -55,9 +55,9 @@ public class Play {
         this.result = result;
     }
 
-    private Result getResultTeam() {
-        if (goalCountFirst > goalCountSecond) return Result.WIN;
-        else if (goalCountFirst < goalCountSecond) return Result.LOST;
-        else return Result.EQUAL;
+    private String getResultTeam() {
+        if (goalCountFirst > goalCountSecond) return String.valueOf(Result.WIN);
+        else if (goalCountFirst < goalCountSecond) return  String.valueOf(Result.LOST);
+        else return String.valueOf(Result.EQUAL);
     }
 }
