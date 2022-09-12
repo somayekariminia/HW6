@@ -61,4 +61,9 @@ public FootballClub(String name,List<Play>plays)
     public void setEqual(int equal) {
         this.equal = equal;
     }
+
+    @Override
+    public int getPlays() {
+        return plays.size();
+    }
 }
