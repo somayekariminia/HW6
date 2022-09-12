@@ -73,7 +73,7 @@ public class FootballRepository {
                     resultSet.getInt(7),
                     resultSet.getInt(8),
                     resultSet.getDouble(9));
-            list.add((club);
+            list.add(club);
         }
         return list;
     }
