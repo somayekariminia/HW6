@@ -9,16 +9,22 @@ public class FootballClub extends Club {
     private int equal;
     private List<Play> plays;
 
-    public FootballClub(String name, int plays, double score, int winCount, int lossCount, int anInt, int resultSetInt, int setInt, double aDouble) {
-        super(name, plays, score, winCount, lossCount);
+    public FootballClub(String name, int plays,int winCount,int lossCount,int goalForCount,int goalAgainst,int differentGoal,double score) {
+        super();
+        this.setName(name);
+        this.setPlays(plays);
+        this.setScore(score);
+        this.setWinCount(winCount);
+        this.setLossCount(lossCount);
+        this.goalForCount=goalForCount;
+        this.goalAgainst=goalAgainst;
+        this.differentGoal=differentGoal;
     }
-
     public FootballClub(String name, List<Play> plays) {
         super();
         super.setName(name);
         this.plays = plays;
     }
-
     public int getGoalForCount() {
         goalForCount = 0;
         for (int i = 0; i < plays.size(); i++) {
