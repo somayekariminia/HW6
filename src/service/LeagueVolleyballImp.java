@@ -25,17 +25,18 @@ public class LeagueVolleyballImp implements League {
 
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
-        plays=null;
-        playFootballRepository.insert(play);
-        plays = playFootballRepository.select((play.getNameTeamFirst()));
-        FootballClub club=new FootballClub(play.getNameTeamFirst(), plays);
-        if (footballRepository.isExist(play.getNameTeamFirst()))
-            footballRepository.update(club);
-        else
-            footballRepository.insert(club);
+        list=null;
+        playVollyball.insert(play);
+        list = playVolleyballRepository.select((play.getNameTeamFirst()));
+        VolleyballClub club=new VolleyballClub(play.getNameTeamFirst(), plays);
+        if (volleyballRepository.isExist(play.getNameTeamFirst())) {
+            volleyballRepository.updateVolleyballClub(club);
+        } else {
+            volleyballRepository.insert(club);
+        }
         plays=null;
         Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
-        playFootballRepository.insert(play1);
+        playVolleyballRepository.insert(play1);
         plays=playFootballRepository.select(play.getNameTeamSecond());
         FootballClub club1=new FootballClub(play.getNameTeamSecond(), plays);
         if (footballRepository.isExist(play.getNameTeamSecond()))
