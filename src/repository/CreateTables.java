@@ -27,4 +27,15 @@ public class CreateTables {
                 "result varchar(10))");
         preparedStatement.executeUpdate();
     }
+    public void creatVolleyballTable() throws SQLException, SQLException {
+        Connection connection = GetConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE football( id  SERIAL PRIMARY KEY NOT NULL," +
+                "name VARCHAR(50) unique not null ," +
+                " countPlay int," +
+                " setWin int," +
+                " setLoss int," +
+                " countWin int,countLoss int," +
+                "score decimal)");
+        preparedStatement.executeUpdate();
+    }
 }

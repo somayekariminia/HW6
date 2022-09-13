@@ -1,8 +1,7 @@
 package view;
 
 import model.Play;
-import repository.CreateTables;
-import service.LeagueFootball;
+import service.LeagueFootballImp;
 
 import java.sql.SQLException;
 
@@ -12,7 +11,7 @@ public class Main {
 //        createTables.creatTablePlay();
 //        createTables.creat();
         Play play = new Play("iran", "emrica", 2, 2);
-        LeagueFootball leagueFootball = new LeagueFootball();
-        leagueFootball.addGamesBetweenTwoClub(play);
+        LeagueFootballImp leagueFootballImp = new LeagueFootballImp();
+        leagueFootballImp.addGamesBetweenTwoClub(play);
     }
 }
