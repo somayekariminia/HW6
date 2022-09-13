@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeagueFootball implements League {
+public class LeagueFootballImp implements League {
     FootballRepository footballRepository=new FootballRepository();
     PlayFootballRepository playFootballRepository=new PlayFootballRepository();
     List<Play> plays=new ArrayList<>();
@@ -23,6 +23,7 @@ public class LeagueFootball implements League {
     @Override
     public void removeTheClubOfLeague(String name) throws SQLException {
             footballRepository.delete(name);
+            playFootballRepository.delete(name);
     }
 
     @Override
