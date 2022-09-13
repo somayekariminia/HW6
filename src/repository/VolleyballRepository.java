@@ -73,5 +73,24 @@ public class VolleyballRepository {
         }
         return flage;
     }
-
+    public FootballClub getClubByname(String name) throws SQLException {
+        Connection connection = GetConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from volleyball where name=? ");
+        preparedStatement.setString(1,name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        FootballClub club=null;
+        while (resultSet.next()) {
+            club = new FootballClub(
+                    resultSet.getString("name"),
+                    resultSet.getInt("countplay"),
+                    resultSet.getInt("goalagainst"),
+                    resultSet.getInt("goalforcount"),
+                    resultSet.getInt("diffgoal"),
+                    resultSet.getInt("countwin"),
+                    resultSet.getInt("countlost"),
+                    resultSet.getInt("countequal"),
+                    resultSet.getDouble("score"));
+        }
+        return club;
+    }
 }
