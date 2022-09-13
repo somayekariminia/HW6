@@ -61,5 +61,17 @@ public class VolleyballRepository {
         }
         return list;
     }
+    public boolean isExist(String name) throws SQLException {
+        Connection connection = GetConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from volleyballgit where name=? ");
+        preparedStatement.setString(1, name);
+        boolean flage = false;
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            if (!resultSet.getString(1).equals(null))
+                flage = true;
+        }
+        return flage;
+    }
 
 }
