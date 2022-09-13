@@ -6,13 +6,6 @@ public class Club {
     private double score;
     private int winCount;
     private int lossCount;
-    public Club(String name, int plays, double score, int winCount, int lossCount) {
-        this.name = name;
-        this.plays = plays;
-        this.score = score;
-        this.winCount = winCount;
-        this.lossCount = lossCount;
-    }
 
     public Club() {
     }
