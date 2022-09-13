@@ -4,36 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VolleyballClub extends Club {
-    private int setWinCount;
-    private int setLossCount;
+    private int setsWinCount;
+    private int setsLossCount;
     private List<Play> plays = new ArrayList<>();
 
-    public VolleyballClub(String name, int plays, double score, int winCount, int lossCount) {
-        super(name, plays, score, winCount, lossCount);
+    public VolleyballClub(String name, int plays, int winCount, int lossCount, int setsWinCount, int setsLossCount, double score ) {
+        super();
+        this.setName(name);
+        this.setPlays(plays);
+        this.setWinCount(winCount);
+        this.setLossCount(lossCount);
+        this.setsWinCount=setsWinCount;
+        this.setsLossCount=setsLossCount;
+        this.setScore(score);
     }
-
-    public int getSetWinCount() {
+public VolleyballClub(String name,List<Play> plays)
+{
+    this.setName(name);
+    this.plays=plays;
+}
+    public int getSetsWinCount() {
         for (Play play:plays)
         {
-         setWinCount+=play.getGoalCountFirst();
+         setsWinCount +=play.getGoalCountFirst();
         }
-        return setWinCount;
+        return setsWinCount;
     }
 
-    public void setSetWinCount(int setWinCount) {
-        this.setWinCount = setWinCount;
+    public void setSetsWinCount(int setsWinCount) {
+        this.setsWinCount = setsWinCount;
     }
 
-    public int getSetLossCount() {
+    public int getSetsLossCount() {
         for (Play play:plays)
         {
-         setLossCount+=play.getGoalCountSecond();
+         setsLossCount +=play.getGoalCountSecond();
         }
-        return setLossCount;
+        return setsLossCount;
     }
 
-    public void setSetLossCount(int setLossCount) {
-        this.setLossCount = setLossCount;
+    @Override
+    public double getScore() {
+        return getScoreVolleyball();
+    }
+    private double getScoreVolleyball() {
+        double score = 0;
+        for (int i = 0; i < plays.size(); i++) {
+            if (plays.get(i).getGoalCountFirst() - plays.get(i).getGoalCountSecond() > 1)
+                score += 3;
+            else if (plays.get(i).getGoalCountFirst() - plays.get(i).getGoalCountSecond() == 1)
+                score += 2;
+            else if (plays.get(i).getGoalCountFirst() - plays.get(i).getGoalCountSecond() == -1)
+                score += 1;
+        }
+        return score;
+    }
+
+    public void setSetsLossCount(int setsLossCount) {
+        this.setsLossCount = setsLossCount;
     }
 
     @Override
@@ -46,7 +74,6 @@ public class VolleyballClub extends Club {
         return winCount;
 
 }
-
     @Override
     public int getLossCount() {
         int lossCount=0;
