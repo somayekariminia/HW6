@@ -27,6 +27,7 @@ public class LeagueFootball implements League {
 
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
+        playFootballRepository.insert(play);
         plays = playFootballRepository.select((play.getNameTeamFirst()));
         Club club=new FootballClub(play.getNameTeamSecond(), plays);
          if (footballRepository.isExist(play.getNameTeamFirst()))
@@ -35,6 +36,8 @@ public class LeagueFootball implements League {
           else
               footballRepository.insert((FootballClub) club);
            plays=null;
+           Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
+           playFootballRepository.insert(play1);
         plays=playFootballRepository.select(play.getNameTeamFirst());
         Club club1=new FootballClub(play.getNameTeamSecond(), plays);
         if (footballRepository.isExist(play.getNameTeamSecond()))

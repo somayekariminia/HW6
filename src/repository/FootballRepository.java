@@ -11,21 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FootballRepository {
-    public void creat() throws SQLException, SQLException {
-        Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE clup( id  SERIAL PRIMARY KEY NOT NULL," +
-                "nameClup VARCHAR(50) unique ," +
-                "countPlay int," +
-                "draw int," +
-                "forgoal int," +
-                "diffgoal int," +
-                "countWin int,countLoss int," +
-                "countEqual int ,score decimal)");
-        preparedStatement.executeUpdate();
-    }
     public void insert(FootballClub clup) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into football values(id,?,?,?,?,?,?,?,?,?) ");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into football values(?,?,?,?,?,?,?,?,?)");
         preparedStatement.setString(1, clup.getName());
         preparedStatement.setInt(2, clup.getPlays());
         preparedStatement.setInt(3, clup.getGoalForCount());
@@ -46,15 +34,16 @@ public class FootballRepository {
     }
     public void update(FootballClub club) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("update  football" + " set countplay=?,draw=?,forgoal=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where nameClup=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("update  football" + " set countplay=?,diffgoal=?,goalAgainst=?,goalForCount=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where name=?");
         preparedStatement.setInt(1, club.getPlays());
-        preparedStatement.setInt(2, club.getGoalForCount());
-        preparedStatement.setInt(3, club.getGoalAgainst());
-        preparedStatement.setInt(4, club.getWinCount());
-        preparedStatement.setInt(5, club.getLossCount());
-        preparedStatement.setInt(6, club.getEqual());
-        preparedStatement.setDouble(7, club.getScore());
-        preparedStatement.setString(8, club.getName());
+        preparedStatement.setInt(2,club.getDifferentGoal());
+        preparedStatement.setInt(3, club.getGoalForCount());
+        preparedStatement.setInt(4, club.getGoalAgainst());
+        preparedStatement.setInt(5, club.getWinCount());
+        preparedStatement.setInt(6, club.getLossCount());
+        preparedStatement.setInt(7, club.getEqual());
+        preparedStatement.setDouble(8, club.getScore());
+        preparedStatement.setString(9, club.getName());
         preparedStatement.executeUpdate();
     }
     public List<FootballClub> select() throws SQLException {
@@ -79,7 +68,7 @@ public class FootballRepository {
     }
     public boolean isExist(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where nameClup=? ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where name=? ");
         preparedStatement.setString(1, name);
         boolean flage = false;
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,7 +80,7 @@ public class FootballRepository {
     }
     public FootballClub selectByname(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where nameclub=? ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where name=? ");
         preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
        FootballClub club=null;

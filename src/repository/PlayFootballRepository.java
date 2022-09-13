@@ -10,18 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayFootballRepository {
-    public void creatTablePlay() throws SQLException {
-        Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("CREATE table playsFootball(id  SERIAL PRIMARY KEY NOT NULL," +
-                "team1 varchar(50),team2 varchar(50)," +
-                "count_team1 int,count_team2 int," +
-                "state varchar(10)," +
-                "id_football int," +
-                "foreign key (id_football) references playsFootball(id))");
-        preparedStatement.executeUpdate();
-    }
+
     public void insert(Play play) throws SQLException {
-        String str = "insert into playsFootball values(id,?,?,?,?,?)";
+        String str = "insert into playsFootball values(?,?,?,?,?)";
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(str);
         preparedStatement.setString(1, play.getNameTeamFirst());
@@ -38,12 +29,11 @@ public class PlayFootballRepository {
     }
     public List<Play> select(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsFootball inner join fooball on playsFootball.id=football.id  where team1=?");
-        preparedStatement.setString(1,name);
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsFootball inner join football on playsFootball.team1=football.name");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Play> list = new ArrayList<>();
         while (resultSet.next()) {
-            Play play = new Play(resultSet.getInt(1),resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getInt(4),resultSet.getString(5));
+            Play play = new Play(resultSet.getInt(1),resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4), resultSet.getInt(5),resultSet.getString(6));
             list.add(play);
         }
         return list;

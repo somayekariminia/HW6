@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class CreateTables {
     public void creat() throws SQLException, SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE clup( id  SERIAL PRIMARY KEY NOT NULL," +
-                "name VARCHAR(50) unique ," +
+        PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE football( id  SERIAL PRIMARY KEY NOT NULL," +
+                "name VARCHAR(50) unique not null ," +
                 " countPlay int," +
                 " goalAgainst int," +
                 " goalForCount int," +
@@ -19,15 +19,14 @@ public class CreateTables {
                 " countEqual int ,score decimal)");
         preparedStatement.executeUpdate();
     }
-    public void insert(Play play) throws SQLException {
-        String str = "insert into playsFootball values(id,?,?,?,?,?)";
+    public void creatTablePlay() throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(str);
-        preparedStatement.setString(1, play.getNameTeamFirst());
-        preparedStatement.setString(2, play.getNameTeamSecond());
-        preparedStatement.setInt(3, play.getGoalCountFirst());
-        preparedStatement.setInt(4, play.getGoalCountSecond());
-        preparedStatement.setString(5, play.getResult());
+        PreparedStatement preparedStatement = connection.prepareStatement("CREATE table playsFootball(id  SERIAL PRIMARY KEY NOT NULL," +
+                "team1 varchar(50),team2 varchar(50)," +
+                "count_team1 int,count_team2 int," +
+                "result varchar(10)," +
+                "id_football int," +
+                "foreign key (id_football) references playsFootball(id))");
         preparedStatement.executeUpdate();
     }
 }
