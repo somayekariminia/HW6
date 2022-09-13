@@ -27,23 +27,23 @@ public class LeagueFootball implements League {
 
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
+        plays=null;
         playFootballRepository.insert(play);
         plays = playFootballRepository.select((play.getNameTeamFirst()));
-        Club club=new FootballClub(play.getNameTeamSecond(), plays);
+        FootballClub club=new FootballClub(play.getNameTeamFirst(), plays);
          if (footballRepository.isExist(play.getNameTeamFirst()))
-             footballRepository.update((FootballClub) club);
-
+             footballRepository.update(club);
           else
-              footballRepository.insert((FootballClub) club);
+              footballRepository.insert(club);
            plays=null;
            Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
            playFootballRepository.insert(play1);
-        plays=playFootballRepository.select(play.getNameTeamFirst());
-        Club club1=new FootballClub(play.getNameTeamSecond(), plays);
+        plays=playFootballRepository.select(play.getNameTeamSecond());
+       FootballClub club1=new FootballClub(play.getNameTeamSecond(), plays);
         if (footballRepository.isExist(play.getNameTeamSecond()))
-           footballRepository.update((FootballClub) club1);
+           footballRepository.update(club1);
         else
-            footballRepository.insert((FootballClub) club1);
+            footballRepository.insert(club1);
     }
     @Override
     public Club viewInformationClub(String name) throws SQLException {

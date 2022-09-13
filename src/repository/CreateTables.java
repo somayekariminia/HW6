@@ -24,9 +24,7 @@ public class CreateTables {
         PreparedStatement preparedStatement = connection.prepareStatement("CREATE table playsFootball(id  SERIAL PRIMARY KEY NOT NULL," +
                 "team1 varchar(50),team2 varchar(50)," +
                 "count_team1 int,count_team2 int," +
-                "result varchar(10)," +
-                "id_football int," +
-                "foreign key (id_football) references playsFootball(id))");
+                "result varchar(10))");
         preparedStatement.executeUpdate();
     }
 }

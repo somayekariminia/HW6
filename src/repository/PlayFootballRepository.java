@@ -12,8 +12,8 @@ import java.util.List;
 public class PlayFootballRepository {
 
     public void insert(Play play) throws SQLException {
-        String str = "insert into playsFootball values(?,?,?,?,?)";
         Connection connection = GetConnection.getConnection();
+        String str = "insert into playsfootball(team1,team2,count_team1,count_team2,result) values(?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(str);
         preparedStatement.setString(1, play.getNameTeamFirst());
         preparedStatement.setString(2, play.getNameTeamSecond());
@@ -29,11 +29,16 @@ public class PlayFootballRepository {
     }
     public List<Play> select(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsFootball inner join football on playsFootball.team1=football.name");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from playsfootball where team1=?");
+        preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Play> list = new ArrayList<>();
         while (resultSet.next()) {
-            Play play = new Play(resultSet.getInt(1),resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4), resultSet.getInt(5),resultSet.getString(6));
+            Play play = new Play(resultSet.getString("team1"),
+                    resultSet.getString("team2"),
+                    resultSet.getInt("count_team1"),
+                    resultSet.getInt("count_team2"),
+                    resultSet.getString("result"));
             list.add(play);
         }
         return list;

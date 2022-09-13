@@ -13,7 +13,7 @@ import java.util.List;
 public class FootballRepository {
     public void insert(FootballClub clup) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into football values(?,?,?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into football(name,countplay,goalAgainst,goalForCount,diffgoal, countWin,countLoss,countEqual,score ) values(?,?,?,?,?,?,?,?,?)");
         preparedStatement.setString(1, clup.getName());
         preparedStatement.setInt(2, clup.getPlays());
         preparedStatement.setInt(3, clup.getGoalForCount());
@@ -25,7 +25,6 @@ public class FootballRepository {
         preparedStatement.setDouble(9, clup.getScore());
         preparedStatement.executeUpdate();
     }
-
     public void delete(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("delete from football where nameclup=?");
@@ -37,8 +36,8 @@ public class FootballRepository {
         PreparedStatement preparedStatement = connection.prepareStatement("update  football" + " set countplay=?,diffgoal=?,goalAgainst=?,goalForCount=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where name=?");
         preparedStatement.setInt(1, club.getPlays());
         preparedStatement.setInt(2,club.getDifferentGoal());
-        preparedStatement.setInt(3, club.getGoalForCount());
-        preparedStatement.setInt(4, club.getGoalAgainst());
+        preparedStatement.setInt(3, club.getGoalAgainst());
+        preparedStatement.setInt(4, club.getGoalForCount());
         preparedStatement.setInt(5, club.getWinCount());
         preparedStatement.setInt(6, club.getLossCount());
         preparedStatement.setInt(7, club.getEqual());
@@ -53,15 +52,15 @@ public class FootballRepository {
         List<FootballClub> list = new ArrayList<>();
         while (resultSet.next()) {
            FootballClub club= new FootballClub(
-                    resultSet.getString(1),
-                    resultSet.getInt(2),
-                    resultSet.getInt(3),
-                    resultSet.getInt(4),
-                    resultSet.getInt(5),
-                    resultSet.getInt(6),
-                    resultSet.getInt(7),
-                    resultSet.getInt(8),
-                    resultSet.getDouble(9));
+                    resultSet.getString("name"),
+                    resultSet.getInt("countplay"),
+                    resultSet.getInt("goalagainst"),
+                    resultSet.getInt("goalforcount"),
+                    resultSet.getInt("diffgoal"),
+                    resultSet.getInt("countWin "),
+                    resultSet.getInt("countLoss"),
+                    resultSet.getInt("countEqual"),
+                    resultSet.getDouble("score"));
             list.add(club);
         }
         return list;
@@ -73,7 +72,7 @@ public class FootballRepository {
         boolean flage = false;
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            if (!resultSet.getString(1).equals(""))
+            if (!resultSet.getString(1).equals(null))
                 flage = true;
         }
         return flage;
@@ -86,15 +85,15 @@ public class FootballRepository {
        FootballClub club=null;
         while (resultSet.next()) {
              club = new FootballClub(
-                    resultSet.getString(1),
-                    resultSet.getInt(2),
-                    resultSet.getInt(3),
-                    resultSet.getInt(4),
-                    resultSet.getInt(5),
-                    resultSet.getInt(6),
-                    resultSet.getInt(7),
-                    resultSet.getInt(8),
-                    resultSet.getDouble(9));
+                    resultSet.getString("name"),
+                    resultSet.getInt("countplay"),
+                    resultSet.getInt("goalagainst"),
+                    resultSet.getInt("goalforcount"),
+                    resultSet.getInt("diffgoal"),
+                    resultSet.getInt("countwin"),
+                    resultSet.getInt("countlost"),
+                    resultSet.getInt("countequal"),
+                    resultSet.getDouble("score"));
         }
         return club;
     }
