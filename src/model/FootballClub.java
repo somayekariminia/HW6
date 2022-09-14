@@ -9,16 +9,17 @@ public class FootballClub extends Club {
     private int equal;
     private List<Play> plays;
 
-    public FootballClub(String name, int plays,int winCount,int lossCount,int goalForCount,int goalAgainst,int differentGoal,double score) {
+    public FootballClub(String name, int plays,int winCount,int lossCount,int equal,int goalForCount,int goalAgainst,int differentGoal,double score) {
         super();
         this.setName(name);
         this.setPlays(plays);
-        this.setScore(score);
         this.setWinCount(winCount);
         this.setLossCount(lossCount);
+        this.setEqual(equal);
         this.goalForCount=goalForCount;
         this.goalAgainst=goalAgainst;
         this.differentGoal=differentGoal;
+        this.setScore(score);
     }
     public FootballClub(String name, List<Play> plays) {
         super();
