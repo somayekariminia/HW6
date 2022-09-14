@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayFootballRepository {
+public class PlaysFootballRepository {
 
     public void insert(Play play) throws SQLException {
         Connection connection = GetConnection.getConnection();
@@ -26,6 +26,7 @@ public class PlayFootballRepository {
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("delete from playsFootball where team1=?");
         preparedStatement.setString(1, name);
+        preparedStatement.executeUpdate();
     }
     public List<Play> select(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();

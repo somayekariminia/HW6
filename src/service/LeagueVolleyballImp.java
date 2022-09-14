@@ -4,6 +4,7 @@ import model.Club;
 import model.FootballClub;
 import model.Play;
 import model.VolleyballClub;
+import repository.PlaysVolleyballRepository;
 import repository.VolleyballRepository;
 
 import java.sql.SQLException;
@@ -12,7 +13,9 @@ import java.util.List;
 
 public class LeagueVolleyballImp implements League {
     VolleyballRepository volleyballRepository=new VolleyballRepository();
+    PlaysVolleyballRepository playsVolleyballRepository=new PlaysVolleyballRepository();
     List<Play>list=new ArrayList<>();
+
     @Override
     public void addClubToLeague(Club club) throws SQLException {
         volleyballRepository.insert((VolleyballClub)club);
@@ -20,39 +23,40 @@ public class LeagueVolleyballImp implements League {
     }
     @Override
     public void removeTheClubOfLeague(String name) throws SQLException {
-           removeTheClubOfLeague(name);
+          volleyballRepository.deleteVolleyballClub(name);
+           playsVolleyballRepository.deletePlayVolleyball(name);
     }
 
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
         list=null;
-        playVollyball.insert(play);
-        list = playVolleyballRepository.select((play.getNameTeamFirst()));
-        VolleyballClub club=new VolleyballClub(play.getNameTeamFirst(), plays);
+        playsVolleyballRepository.insertPlayVolleyball(play);
+        list = playsVolleyballRepository.getListOfPlays((play.getNameTeamFirst()));
+        VolleyballClub club=new VolleyballClub(play.getNameTeamFirst(),list);
         if (volleyballRepository.isExist(play.getNameTeamFirst())) {
             volleyballRepository.updateVolleyballClub(club);
         } else {
             volleyballRepository.insert(club);
         }
-        plays=null;
+       list=null;
         Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
-        playVolleyballRepository.insert(play1);
-        plays=playFootballRepository.select(play.getNameTeamSecond());
-        FootballClub club1=new FootballClub(play.getNameTeamSecond(), plays);
-        if (footballRepository.isExist(play.getNameTeamSecond()))
-            footballRepository.update(club1);
+        playsVolleyballRepository.insertPlayVolleyball(play1);
+        list=playsVolleyballRepository.getListOfPlays(play.getNameTeamSecond());
+       VolleyballClub club1=new VolleyballClub(play.getNameTeamSecond(),list);
+        if (volleyballRepository.isExist(play.getNameTeamSecond()))
+           volleyballRepository.updateVolleyballClub(club1);
         else
-            footballRepository.insert(club1);
-    }
+            volleyballRepository.insert(club1);
     }
 
     @Override
     public Club viewInformationClub(String name) throws SQLException {
-        return null;
+       Club club=volleyballRepository.getClubByName(name);
+       return club;
     }
 
     @Override
     public List seeTheLeagueTable() throws SQLException {
-        return null;
+        return volleyballRepository.getListClubVolleyball();
     }
 }

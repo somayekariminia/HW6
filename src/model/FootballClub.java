@@ -113,13 +113,13 @@ public class FootballClub extends Club {
     public String toString() {
         return " club " +
                 ""+getName()+
-                " plays " + plays +
-                " countWin " +getWinCount()+
-                " countLoss " +getLossCount()+
-                " goalForCount " + goalForCount +
-                " goalAgainst " + goalAgainst +
-                " differentGoal " + differentGoal +
-                " equal " + equal +
-                " score " + getScore();
+                "  plays " + super.getPlays() +
+                "  countWin " +super.getWinCount()+
+                "  countLoss " +super.getLossCount()+
+                "  equal " + equal +
+                "  goalForCount " + goalForCount +
+                "  goalAgainst " + goalAgainst +
+                "  differentGoal " + differentGoal +
+                "  score " + super.getScore();
     }
 }

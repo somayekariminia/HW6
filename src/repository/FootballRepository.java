@@ -16,8 +16,8 @@ public class FootballRepository {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into football(name,countplay,goalAgainst,goalForCount,diffgoal, countWin,countLoss,countEqual,score ) values(?,?,?,?,?,?,?,?,?)");
         preparedStatement.setString(1, clup.getName());
         preparedStatement.setInt(2, clup.getPlays());
-        preparedStatement.setInt(3, clup.getGoalForCount());
-        preparedStatement.setInt(4, clup.getGoalAgainst());
+        preparedStatement.setInt(3, clup.getGoalAgainst());
+        preparedStatement.setInt(4, clup.getGoalForCount());
         preparedStatement.setInt(5, clup.getDifferentGoal());
         preparedStatement.setInt(6, clup.getWinCount());
         preparedStatement.setInt(7, clup.getLossCount());
@@ -27,7 +27,7 @@ public class FootballRepository {
     }
     public void delete(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from football where nameclup=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from football where name=?");
         preparedStatement.setString(1, name);
         preparedStatement.executeUpdate();
     }
@@ -54,12 +54,12 @@ public class FootballRepository {
            FootballClub club= new FootballClub(
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
+                   resultSet.getInt("countwin"),
+                   resultSet.getInt("countLoss"),
+                   resultSet.getInt("countEqual"),
+                   resultSet.getInt("goalforcount"),
                     resultSet.getInt("goalagainst"),
-                    resultSet.getInt("goalforcount"),
                     resultSet.getInt("diffgoal"),
-                    resultSet.getInt("countWin "),
-                    resultSet.getInt("countLoss"),
-                    resultSet.getInt("countEqual"),
                     resultSet.getDouble("score"));
             list.add(club);
         }
@@ -87,12 +87,12 @@ public class FootballRepository {
              club = new FootballClub(
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
-                    resultSet.getInt("goalagainst"),
-                    resultSet.getInt("goalforcount"),
+                     resultSet.getInt("countwin"),
+                     resultSet.getInt("countequal"),
+                     resultSet.getInt("countlost"),
+                     resultSet.getInt("goalforcount"),
+                     resultSet.getInt("goalagainst"),
                     resultSet.getInt("diffgoal"),
-                    resultSet.getInt("countwin"),
-                    resultSet.getInt("countlost"),
-                    resultSet.getInt("countequal"),
                     resultSet.getDouble("score"));
         }
         return club;

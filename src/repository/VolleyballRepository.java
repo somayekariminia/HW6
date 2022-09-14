@@ -13,11 +13,11 @@ import java.util.List;
 public class VolleyballRepository {
     public void insert(VolleyballClub club) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into volleyball (name,countplay,setWin,setLoss, countWin,countLoss,score ) values(?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into volleyball (name,countplay,setsWin,setsLoss, countWin,countLoss,score ) values(?,?,?,?,?,?,?)");
         preparedStatement.setString(1, club.getName());
         preparedStatement.setInt(2, club.getPlays());
-        preparedStatement.setInt(3, club.getSetWinCount());
-        preparedStatement.setInt(4, club.getSetLossCount());
+        preparedStatement.setInt(3, club.getSetsWinCount());
+        preparedStatement.setInt(4, club.getSetsLossCount());
         preparedStatement.setInt(5, club.getWinCount());
         preparedStatement.setInt(6, club.getLossCount());
         preparedStatement.setDouble(7, club.getScore());
@@ -26,17 +26,17 @@ public class VolleyballRepository {
 
     public void deleteVolleyballClub(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from volleyball where nameclup=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from volleyball where name=?");
         preparedStatement.setString(1, name);
         preparedStatement.executeUpdate();
     }
 
     public void updateVolleyballClub(VolleyballClub club) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("update  volleyball" + " set countplay=?,setwincount=?,setLosscount=?,countWin=?,countLoss=?,countEqual=?,score=? " + " where name=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("update  volleyball" + " set countplay=?,setswin=?,setsLoss=?,countWin=?,countLoss=?,score=? " + " where name=?");
         preparedStatement.setInt(1, club.getPlays());
-        preparedStatement.setInt(2, club.getSetWinCount());
-        preparedStatement.setInt(3, club.getSetLossCount());
+        preparedStatement.setInt(2, club.getSetsWinCount());
+        preparedStatement.setInt(3, club.getSetsLossCount());
         preparedStatement.setInt(4, club.getWinCount());
         preparedStatement.setInt(5, club.getLossCount());
         preparedStatement.setDouble(6, club.getScore());
@@ -44,7 +44,7 @@ public class VolleyballRepository {
         preparedStatement.executeUpdate();
     }
 
-    public List<FootballClub> getListClubVolleyball() throws SQLException {
+    public List<VolleyballClub> getListClubVolleyball() throws SQLException {
         Connection connection = GetConnection.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from volleyball order by score desc ");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -53,11 +53,10 @@ public class VolleyballRepository {
             VolleyballClub club = new VolleyballClub(
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
-                    resultSet.getInt("setWin"),
-                    resultSet.getInt("setLoss"),
-                    resultSet.getInt("countWin "),
-                    resultSet.getInt("countLoss"),
-                    resultSet.getInt("countEqual"),
+                    resultSet.getInt("countwin"),
+                    resultSet.getInt("countloss"),
+                    resultSet.getInt("setsWin"),
+                    resultSet.getInt("setsLoss"),
                     resultSet.getDouble("score"));
             list.add(club);
         }
@@ -66,7 +65,7 @@ public class VolleyballRepository {
 
     public boolean isExist(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from volleyballgit where name=? ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from volleyball where name=? ");
         preparedStatement.setString(1, name);
         boolean flage = false;
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -87,8 +86,8 @@ public class VolleyballRepository {
             club = new VolleyballClub(
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
-                    resultSet.getInt("setwin"),
-                    resultSet.getInt("setloss"),
+                    resultSet.getInt("setswin"),
+                    resultSet.getInt("setsloss"),
                     resultSet.getInt("countwin"),
                     resultSet.getInt("countloss"),
                     resultSet.getDouble("score"));

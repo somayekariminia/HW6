@@ -66,22 +66,36 @@ public VolleyballClub(String name,List<Play> plays)
 
     @Override
     public int getWinCount() {
-        int winCount=0;
-        for (Play play:plays) {
-            if(play.getResult().equals(Result.WIN))
-                winCount++;
+        int countWin = 0;
+        for (int i = 0; i < plays.size(); i++) {
+            if (plays.get(i).getResult().equals("WIN"))
+                countWin++;
         }
-        return winCount;
-
+        return countWin;
 }
     @Override
     public int getLossCount() {
-        int lossCount=0;
-        for (Play play:plays) {
-            if(play.getResult().equals(Result.LOST))
-                lossCount++;
+        int countLost = 0;
+        for (int i = 0; i < plays.size(); i++) {
+            if (plays.get(i).getResult().equals("LOST"))
+                countLost++;
         }
-        return lossCount;
+        return countLost;
     }
 
+    @Override
+    public int getPlays() {
+        return plays.size();
     }
+
+    @Override
+    public String toString() {
+        return " club " + getName()+
+                "  countPlays " +super.getPlays()+
+                "  setsWinCount " + setsWinCount +
+                "  setsLossCount " + setsLossCount +
+                "  winCount " + super.getWinCount()+
+                "  lossCount "  + super.getLossCount()+
+                "  score " + super.getScore();
+    }
+}
