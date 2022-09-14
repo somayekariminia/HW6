@@ -3,10 +3,7 @@ package view;
 import model.FootballClub;
 import model.Play;
 import model.VolleyballClub;
-import service.GameFootballImpl;
-import service.GameVolleyballImp;
-import service.League;
-import service.LeagueFootballImp;
+import service.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ List<Play> plays=new ArrayList<>();
 Scanner scanner=new Scanner(System.in);
 GameVolleyballImp gameVolleyballImp=new GameVolleyballImp();
 GameFootballImpl gameFootball=new GameFootballImpl();
-List<FootballClub>list=new ArrayList<>();
+LeagueVolleyballImp leagueVolleyballImp=new LeagueVolleyballImp();
  public Play getNewPlayFootball() throws SQLException {
      System.out.println(" enter 'name' team first : ");
      String nameFirstTeam=scanner.nextLine();
@@ -64,7 +61,7 @@ List<FootballClub>list=new ArrayList<>();
         }
         return footballClub=new FootballClub(name,plays);
     }
-    public FootballClub getNewVolleyballClub() throws SQLException {
+    public VolleyballClub getNewVolleyballClub() throws SQLException {
         System.out.println(" Enter Name club :");
         String name=scanner.nextLine();
         System.out.println(" Enter Number plays Team:");
@@ -73,12 +70,13 @@ List<FootballClub>list=new ArrayList<>();
             play=getNewPlayVolleyball();
             plays.add(play);
         }
-        return footballClub=new FootballClub(name,plays);
+        return volleyballClub=new VolleyballClub(name,plays);
     }
     public void leagueFootball() throws SQLException {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("                                                                       ");
         System.out.println("1: add \n 2: delet \n 3: addgame \n 4: seetheclub \n 5: seeTableClubs\n 6: exite");
+        List<FootballClub>list=new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         String answer = "";
@@ -110,6 +108,51 @@ List<FootballClub>list=new ArrayList<>();
                     list=leagueFootballImp.seeTheLeagueTable();
                     for (FootballClub football:list) {
                         System.out.println(football.toString());
+                    }
+                    break;
+                default:
+                    System.out.println("for exite enter exit");
+                    answer = scanner.next();
+                    break;
+            }
+        }
+    }
+    public void leagueVolleyball() throws SQLException {
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("                                                                       ");
+        System.out.println("1: add \n 2: delet \n 3: addgame \n 4: seetheclub \n 5: seeTableClubs\n 6: exite");
+        List<VolleyballClub> list=new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        String answer = "";
+        while (!answer.equals("exit")) {
+            switch (choice) {
+                case 1:
+                    VolleyballClub volleyballClub1=getNewVolleyballClub();
+                    leagueVolleyballImp.addClubToLeague(volleyballClub1);
+                    System.out.println(" add theclub ");
+                    break;
+                case 2:
+                    System.out.println(" enter name will delete team");
+                    String name = scanner.next();
+                    leagueVolleyballImp.removeTheClubOfLeague(name);
+                    System.out.println("delete the club");
+                    break;
+                case 3:
+                    Play play1=getNewPlayVolleyball();
+                   leagueVolleyballImp.addGamesBetweenTwoClub(play1);
+                    break;
+                case 4:
+                    System.out.println(" enter name team will view ");
+                    String name1 = scanner.next();
+                  VolleyballClub club= (VolleyballClub) leagueVolleyballImp.viewInformationClub(name1);
+                    System.out.println(club.toString());
+                    break;
+                case 5:
+                    list=null;
+                    list=leagueVolleyballImp.seeTheLeagueTable();
+                    for (VolleyballClub volleyballClub2:list) {
+                        System.out.println(volleyballClub2.toString());
                     }
                     break;
                 default:
