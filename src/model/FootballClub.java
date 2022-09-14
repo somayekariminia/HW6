@@ -108,4 +108,18 @@ public class FootballClub extends Club {
     public int getPlays() {
         return plays.size();
     }
+
+    @Override
+    public String toString() {
+        return " club " +
+                ""+getName()+
+                " plays " + plays +
+                " countWin " +getWinCount()+
+                " countLoss " +getLossCount()+
+                " goalForCount " + goalForCount +
+                " goalAgainst " + goalAgainst +
+                " differentGoal " + differentGoal +
+                " equal " + equal +
+                " score " + getScore();
+    }
 }
