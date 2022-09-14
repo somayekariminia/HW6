@@ -30,7 +30,6 @@ public class LeagueVolleyballImp implements League {
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
         list=null;
-        playsVolleyballRepository.insertPlayVolleyball(play);
         list = playsVolleyballRepository.getListOfPlays((play.getNameTeamFirst()));
         VolleyballClub club=new VolleyballClub(play.getNameTeamFirst(),list);
         if (volleyballRepository.isExist(play.getNameTeamFirst())) {
@@ -39,8 +38,6 @@ public class LeagueVolleyballImp implements League {
             volleyballRepository.insert(club);
         }
        list=null;
-        Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
-        playsVolleyballRepository.insertPlayVolleyball(play1);
         list=playsVolleyballRepository.getListOfPlays(play.getNameTeamSecond());
        VolleyballClub club1=new VolleyballClub(play.getNameTeamSecond(),list);
         if (volleyballRepository.isExist(play.getNameTeamSecond()))
