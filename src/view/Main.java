@@ -1,47 +1,30 @@
 package view;
 
-import model.FootballClub;
-import model.Play;
-import model.VolleyballClub;
-import repository.CreateTables;
-import service.League;
-import service.LeagueFootballImp;
-import service.LeagueVolleyballImp;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-       CreateTables createTables = new CreateTables();
-//        createTables.creatTablePlay();
-//        createTables.creat();
-       // createTables.creatVolleyballTable();
-      //  createTables.creatPlaysVolleyballTable();
-        List<FootballClub> leagues1=new ArrayList<>();
-        List<VolleyballClub> volleyballClubs=new ArrayList<>();
-        Play play = new Play("iran", "japan", 2, 2);
-        League leagueFootballImp = new LeagueFootballImp();
-        Play playv=new Play("iran","italy",2,3);
-        leagueFootballImp.addGamesBetweenTwoClub(play);
-        League league=new LeagueVolleyballImp();
-        league.addGamesBetweenTwoClub(playv);
-       // leagueFootballImp.removeTheClubOfLeague(play.getNameTeamFirst());
-        //league.removeTheClubOfLeague(playv.getNameTeamFirst());
-        leagues1=leagueFootballImp.seeTheLeagueTable();
-        for (FootballClub football:leagues1) {
-            System.out.println("---------------------------------------------------------");
-            System.out.println(football.toString());
-            System.out.println("----------------------------------------------------------");
+        Scanner scanner = new Scanner(System.in);
+        MainHelp mainHelp=new MainHelp();
+        System.out.println(" ");
+        System.out.println("1: leagueFootball\n2: leagueVolleyball \n3: exit");
+        int choice = scanner.nextInt();
+        String answer = "";
+        while (!answer.equals("exit")) {
+            switch (choice) {
+                case 1 -> {
+                mainHelp.leagueFootball();
+                }
+                case 2 -> {
+                 mainHelp.leagueVolleyball();
+                }
+                default -> {
+                    System.out.println("for exite enter exit");
+                    answer = scanner.next();
+                }
+            }
         }
-        System.out.println("****************************************************************");
-volleyballClubs=league.seeTheLeagueTable();
-        for (VolleyballClub volleyball:volleyballClubs) {
-            System.out.println("---------------------------------------------------------");
-            System.out.println(volleyball.toString());
-            System.out.println("                 ");
-            System.out.println("--------------------------------------------------------");
-        }
-}
+    }
+
 }
