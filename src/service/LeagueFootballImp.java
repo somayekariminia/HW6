@@ -43,10 +43,10 @@ public class LeagueFootballImp implements League {
             footballRepository.insert(club1);
     }
     @Override
-    public Club viewInformationClub(String name) throws SQLException {
+    public FootballClub viewInformationClub(String name) throws SQLException {
         Club footballClub;
-       footballClub=footballRepository.selectByname("name");
-       return footballClub;
+       footballClub=footballRepository.selectByname(name);
+       return (FootballClub) footballClub;
     }
 
     @Override

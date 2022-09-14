@@ -20,8 +20,7 @@ public class Main {
                  mainHelp.leagueVolleyball();
                 }
                 default -> {
-                    System.out.println("for exite enter exit");
-                    answer = scanner.next();
+
                 }
             }
         }

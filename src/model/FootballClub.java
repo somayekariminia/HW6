@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FootballClub extends Club {
     private int goalForCount;
@@ -121,5 +122,23 @@ public class FootballClub extends Club {
                 "  goalAgainst " + goalAgainst +
                 "  differentGoal " + differentGoal +
                 "  score " + super.getScore();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        FootballClub footballClub = (FootballClub) o;
+        return getGoalForCount() == footballClub.getGoalForCount() &&
+                getGoalAgainst() == footballClub.getGoalAgainst() &&
+                getDifferentGoal() == footballClub.getDifferentGoal() &&
+                getEqual() == footballClub.getEqual() &&
+                (getPlays()==footballClub.getPlays());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getGoalForCount(), getGoalAgainst(), getDifferentGoal(), getEqual(), getPlays());
     }
 }

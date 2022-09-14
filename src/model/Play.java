@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Play {
     private String nameTeamFirst;
     private String nameTeamSecond;
@@ -13,6 +15,7 @@ public class Play {
         this.goalCountSecond = goalCountSecond;
         this.result = Result.valueOf(result);
     }
+
 
     public Play(String nameTeamFirst, String nameTeamSecond, int goalCountFirst, int goalCountSecond) {
         this.nameTeamFirst = nameTeamFirst;
@@ -65,5 +68,32 @@ public class Play {
         if (goalCountFirst > goalCountSecond) return String.valueOf(Result.WIN);
         else if (goalCountFirst < goalCountSecond) return  String.valueOf(Result.LOST);
         else return String.valueOf(Result.EQUAL);
+    }
+
+    @Override
+    public String toString() {
+        return "Play" +
+                "nameTeamFirst='" + nameTeamFirst  +
+                " nameTeamSecond='" + nameTeamSecond +
+                " goalCountFirst=" + goalCountFirst +
+                " goalCountSecond=" + goalCountSecond +
+                " result=" + result ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Play play = (Play) o;
+        return getGoalCountFirst() == play.getGoalCountFirst() &&
+                getGoalCountSecond() == play.getGoalCountSecond() &&
+               getNameTeamFirst().equals(play.getNameTeamFirst()) &&
+               getNameTeamSecond().equals(play.getNameTeamSecond()) &&
+                getResult() == play.getResult();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNameTeamFirst(), getNameTeamSecond(), getGoalCountFirst(), getGoalCountSecond(), getResult());
     }
 }

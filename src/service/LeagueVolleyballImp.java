@@ -15,6 +15,7 @@ public class LeagueVolleyballImp implements League {
     VolleyballRepository volleyballRepository=new VolleyballRepository();
     PlaysVolleyballRepository playsVolleyballRepository=new PlaysVolleyballRepository();
     List<Play>list=new ArrayList<>();
+    List<VolleyballClub>volleyballClubs=new ArrayList<>();
 
     @Override
     public void addClubToLeague(Club club) throws SQLException {
@@ -30,6 +31,7 @@ public class LeagueVolleyballImp implements League {
     @Override
     public void addGamesBetweenTwoClub(Play play) throws SQLException {
         list=null;
+        playsVolleyballRepository.insertPlayVolleyball(play);
         list = playsVolleyballRepository.getListOfPlays((play.getNameTeamFirst()));
         VolleyballClub club=new VolleyballClub(play.getNameTeamFirst(),list);
         if (volleyballRepository.isExist(play.getNameTeamFirst())) {
@@ -38,6 +40,8 @@ public class LeagueVolleyballImp implements League {
             volleyballRepository.insert(club);
         }
        list=null;
+        Play play1=new Play(play.getNameTeamSecond(), play.getNameTeamFirst(), play.getGoalCountSecond(),play.getGoalCountFirst());
+        playsVolleyballRepository.insertPlayVolleyball(play1);
         list=playsVolleyballRepository.getListOfPlays(play.getNameTeamSecond());
        VolleyballClub club1=new VolleyballClub(play.getNameTeamSecond(),list);
         if (volleyballRepository.isExist(play.getNameTeamSecond()))
@@ -47,13 +51,15 @@ public class LeagueVolleyballImp implements League {
     }
 
     @Override
-    public Club viewInformationClub(String name) throws SQLException {
-       Club club=volleyballRepository.getClubByName(name);
-       return club;
+    public VolleyballClub viewInformationClub(String name) throws SQLException {
+       VolleyballClub club=volleyballRepository.getClubByName(name);
+       return  club;
     }
 
     @Override
     public List seeTheLeagueTable() throws SQLException {
-        return volleyballRepository.getListClubVolleyball();
+       volleyballClubs=null;
+      volleyballClubs=volleyballRepository.getListClubVolleyball();
+        return volleyballClubs;
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Club {
     private String name;
     private int plays;
@@ -48,5 +50,28 @@ public class Club {
 
     public void setLossCount(int lossCount) {
         this.lossCount = lossCount;
+    }
+
+    @Override
+    public String toString() {
+        return "" +
+                "name='" + name +
+                ", plays=" + plays +
+                ", score=" + score +
+                ", winCount=" + winCount +
+                ", lossCount=" + lossCount ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Club club = (Club) o;
+        return plays == club.plays && Double.compare(club.score, score) == 0 && winCount == club.winCount && lossCount == club.lossCount && club.equals(name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, plays, score, winCount, lossCount);
     }
 }

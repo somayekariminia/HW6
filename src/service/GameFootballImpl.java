@@ -1,6 +1,7 @@
 package service;
 
 import model.Play;
+import repository.PlaysFootballRepository;
 import repository.PlaysVolleyballRepository;
 
 import java.sql.SQLException;
@@ -8,21 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameFootballImpl implements Game{
-    PlaysVolleyballRepository playsVolleyballRepository=new PlaysVolleyballRepository();
+PlaysFootballRepository playsFootballRepository=new PlaysFootballRepository();
     List<Play> plays=new ArrayList<>();
     @Override
     public void addPlayToTable(Play play) throws SQLException {
-      playsVolleyballRepository.insertPlayVolleyball(play);
+      playsFootballRepository.insert(play);
     }
 
     @Override
     public void deletePlayOfTable(String name) throws SQLException {
-playsVolleyballRepository.deletePlayVolleyball(name);
+     playsFootballRepository.delete(name);
     }
 
     @Override
     public List<Play> getPlaysOfTable(String name) throws SQLException {
-         return plays=playsVolleyballRepository.getListOfPlays(name);
+         return plays=playsFootballRepository.select(name);
 
     }
 }

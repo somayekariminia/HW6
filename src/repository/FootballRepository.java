@@ -79,7 +79,7 @@ public class FootballRepository {
     }
     public FootballClub selectByname(String name) throws SQLException {
         Connection connection = GetConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where name=? ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from football where name =? ");
         preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
        FootballClub club=null;
@@ -88,8 +88,8 @@ public class FootballRepository {
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
                      resultSet.getInt("countwin"),
+                     resultSet.getInt("countloss"),
                      resultSet.getInt("countequal"),
-                     resultSet.getInt("countlost"),
                      resultSet.getInt("goalforcount"),
                      resultSet.getInt("goalagainst"),
                     resultSet.getInt("diffgoal"),

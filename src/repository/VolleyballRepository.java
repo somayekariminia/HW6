@@ -86,10 +86,10 @@ public class VolleyballRepository {
             club = new VolleyballClub(
                     resultSet.getString("name"),
                     resultSet.getInt("countplay"),
-                    resultSet.getInt("setswin"),
-                    resultSet.getInt("setsloss"),
                     resultSet.getInt("countwin"),
                     resultSet.getInt("countloss"),
+                    resultSet.getInt("setswin"),
+                    resultSet.getInt("setsloss"),
                     resultSet.getDouble("score"));
         }
         return club;

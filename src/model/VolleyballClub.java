@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VolleyballClub extends Club {
     private int setsWinCount;
@@ -97,5 +98,20 @@ public VolleyballClub(String name,List<Play> plays)
                 "  winCount " + super.getWinCount()+
                 "  lossCount "  + super.getLossCount()+
                 "  score " + super.getScore();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        VolleyballClub volleyballClub = (VolleyballClub) o;
+        return getSetsWinCount() ==volleyballClub.getSetsWinCount() &&
+                getSetsLossCount() == volleyballClub.getSetsLossCount() &&
+                Objects.equals(getPlays(), volleyballClub.getPlays());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getSetsWinCount(), getSetsLossCount(), getPlays());
     }
 }
