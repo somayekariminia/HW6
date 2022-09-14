@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayVolleyballRepository {
+public class PlaysVolleyballRepository {
 
     public void insertPlayVolleyball(Play play) throws SQLException {
         Connection connection = GetConnection.getConnection();
