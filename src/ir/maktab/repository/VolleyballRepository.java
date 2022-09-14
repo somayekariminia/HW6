@@ -1,7 +1,6 @@
-package repository;
+package ir.maktab.repository;
 
-import model.FootballClub;
-import model.VolleyballClub;
+import ir.maktab.model.VolleyballClub;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

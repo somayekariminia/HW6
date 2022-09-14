@@ -1,6 +1,6 @@
-package service;
+package ir.maktab.service;
 
-import model.Play;
+import ir.maktab.model.Play;
 
 import java.sql.SQLException;
 import java.util.List;

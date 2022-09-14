@@ -1,8 +1,7 @@
-package service;
+package ir.maktab.service;
 
-import model.Play;
-import repository.PlaysFootballRepository;
-import repository.PlaysVolleyballRepository;
+import ir.maktab.model.Play;
+import ir.maktab.repository.PlaysFootballRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

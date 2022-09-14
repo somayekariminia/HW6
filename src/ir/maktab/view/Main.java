@@ -1,4 +1,4 @@
-package view;
+package ir.maktab.view;
 
 import java.sql.SQLException;
 import java.util.Scanner;

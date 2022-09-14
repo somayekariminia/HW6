@@ -1,6 +1,4 @@
-package repository;
-
-import model.Play;
+package ir.maktab.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package model;
+package ir.maktab.model;
 
 import java.util.Objects;
 

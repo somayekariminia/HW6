@@ -1,10 +1,10 @@
-package service;
+package ir.maktab.service;
 
-import model.Club;
-import model.FootballClub;
-import model.Play;
-import repository.FootballRepository;
-import repository.PlaysFootballRepository;
+import ir.maktab.model.Play;
+import ir.maktab.repository.FootballRepository;
+import ir.maktab.model.Club;
+import ir.maktab.model.FootballClub;
+import ir.maktab.repository.PlaysFootballRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,8 +1,12 @@
-package view;
+package ir.maktab.view;
 
-import model.FootballClub;
-import model.Play;
-import model.VolleyballClub;
+import ir.maktab.model.Play;
+import ir.maktab.service.GameFootballImpl;
+import ir.maktab.service.GameVolleyballImp;
+import ir.maktab.service.LeagueFootballImp;
+import ir.maktab.model.FootballClub;
+import ir.maktab.model.VolleyballClub;
+import ir.maktab.service.LeagueVolleyballImp;
 import service.*;
 
 import java.sql.SQLException;
